@@ -17,12 +17,6 @@
 			"headers": "Authorization: Basic REVWRUxPUEVSOlBhY3JveTU1\nX-CSRF-Token: Fetch\n",
 			"headerData": [
 				{
-					"key": "Authorization",
-					"value": "Basic REVWRUxPUEVSOlBhY3JveTU1",
-					"description": "",
-					"enabled": true
-				},
-				{
 					"key": "X-CSRF-Token",
 					"value": "Fetch",
 					"description": "",
@@ -67,12 +61,6 @@
 				{
 					"key": "Content-Type",
 					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Authorization",
-					"value": "Basic REVWRUxPUEVSOlBhY3JveTU1",
 					"description": "",
 					"enabled": true
 				}

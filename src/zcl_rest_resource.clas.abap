@@ -33,6 +33,7 @@ CLASS zcl_rest_resource IMPLEMENTATION.
     /ui2/cl_json=>deserialize( EXPORTING json = lv_request_body CHANGING data = ls_request ).
 
     IF ls_request-name IS INITIAL.
+      mo_response->set_status( cl_rest_status_code=>gc_client_error_bad_request ).
       RAISE EXCEPTION TYPE cx_rest_resource_exception
         EXPORTING
           status_code    = cl_rest_status_code=>gc_client_error_bad_request

@@ -1,95 +1,141 @@
 {
-	"id": "c589ec0a-aefe-2333-116e-a9e0f3318318",
-	"name": "SimpleRESTTest",
-	"description": "",
-	"order": [
-		"52db934f-26e8-5f4f-9cc4-2f642b1905e5",
-		"e7e4fab2-3101-407b-5580-3eabba6e6ecf"
-	],
-	"folders": [],
-	"folders_order": [],
-	"timestamp": 1504947006056,
-	"owner": "2240689",
-	"public": false,
-	"requests": [
+	"info": {
+		"name": "SimpleRESTTest",
+		"_postman_id": "3eddba78-a232-8b3b-e9d0-2f04dcfd9f2b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "52db934f-26e8-5f4f-9cc4-2f642b1905e5",
-			"headers": "Authorization: Basic REVWRUxPUEVSOlBhY3JveTU1\nX-CSRF-Token: Fetch\n",
-			"headerData": [
-				{
-					"key": "X-CSRF-Token",
-					"value": "Fetch",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://vhcalnplci.dummy.nodomain:8000/test/hello?sap-client=001",
-			"queryParams": [
-				{
-					"key": "sap-client",
-					"value": "001",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "GET",
-			"data": null,
-			"dataMode": "params",
-			"tests": "postman.setGlobalVariable(\"x-csrf-token\", postman.getResponseHeader(\"x-csrf-token\"));\n",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1504948023491,
 			"name": "GetToken",
-			"description": "",
-			"collectionId": "c589ec0a-aefe-2333-116e-a9e0f3318318",
-			"responses": []
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (tests[\"Status code is 200\"] = responseCode.code === 200) {",
+							"    var token = postman.getResponseHeader(\"x-csrf-token\");",
+							"    tests[\"x-csrf-token=\" + token] = true;",
+							"    pm.environment.set(\"x-csrf-token\", token);",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"type": "any"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic REVWRUxPUEVSOlBhY3JveTU1"
+					},
+					{
+						"key": "X-CSRF-Token",
+						"value": "Fetch"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/test/hello?sap-client=001",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"test",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "sap-client",
+							"value": "001",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		},
 		{
-			"id": "e7e4fab2-3101-407b-5580-3eabba6e6ecf",
-			"headers": "x-csrf-token: {{x-csrf-token}}\nContent-Type: application/json\nAuthorization: Basic REVWRUxPUEVSOlBhY3JveTU1\n",
-			"headerData": [
-				{
-					"key": "x-csrf-token",
-					"value": "{{x-csrf-token}}",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"url": "http://vhcalnplci.dummy.nodomain:8000/test/hello?sap-client=001",
-			"queryParams": [
-				{
-					"key": "sap-client",
-					"value": "001",
-					"equals": true,
-					"description": "",
-					"enabled": true
-				}
-			],
-			"preRequestScript": null,
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [],
-			"dataMode": "raw",
-			"tests": null,
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1504948067185,
 			"name": "PostHello",
-			"description": "",
-			"collectionId": "c589ec0a-aefe-2333-116e-a9e0f3318318",
-			"responses": [],
-			"rawModeData": "{\n\t\"name\": \"John\",\n\t\"age\": 32,\n\t\"city\": \"Bangkok\"\n}"
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-csrf-token",
+						"value": "{{x-csrf-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"John\",\n\t\"age\": 32,\n\t\"city\": \"Bangkok\"\n}"
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}:{{port}}/test/hello?sap-client=001",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"test",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "sap-client",
+							"value": "001",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

@@ -53,6 +53,6 @@ CLASS zcl_rest_resource IMPLEMENTATION.
     DATA(lo_entity) = mo_response->create_entity( ).
     lo_entity->set_content_type( if_rest_media_type=>gc_appl_json ).
     lo_entity->set_string_data( /ui2/cl_json=>serialize( lo_response ) ).
-    mo_response->set_status( cl_rest_status_code=>gc_success_ok ).
+    mo_response->set_status( cl_rest_status_code=>gc_success_created ).
   ENDMETHOD.
 ENDCLASS.

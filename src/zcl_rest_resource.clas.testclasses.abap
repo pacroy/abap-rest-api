@@ -65,7 +65,7 @@ CLASS ltcl_post IMPLEMENTATION.
     mo_cut->if_rest_resource~post( NEW cl_rest_entity( ) ).
 
     cl_abap_unit_assert=>assert_equals(
-      exp = cl_rest_status_code=>gc_success_ok
+      exp = cl_rest_status_code=>gc_success_created
       act = mo_cut->mo_response->get_status( )
     ).
   ENDMETHOD.

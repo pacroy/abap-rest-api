@@ -13,7 +13,7 @@ node {
     stage('ABAP Unit and Code Coverage') {
 		dir('sap-pipeline') {
 			withCredentials([usernamePassword(credentialsId: 'NPL', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-				bat "newman run abap_unit_coverage.postman_collection.json --insecure --bail --environment G4E_Pipeline.postman_environment.json --global-var username=$USERNAME --global-var password=$PASSWORD --timeout-request 120000"
+				bat "newman run abap_unit_coverage.postman_collection.json --insecure --bail --environment NPL.postman_environment.json --global-var username=$USERNAME --global-var password=$PASSWORD --timeout-request 120000"
 			}
 		}
     }
@@ -21,7 +21,7 @@ node {
     stage('ABAP Code Inspector') {
 		dir('sap-pipeline') {
 			withCredentials([usernamePassword(credentialsId: 'NPL', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-				bat "newman run abap_sci.postman_collection.json --insecure --bail --environment G4E_Pipeline.postman_environment.json --global-var username=$USERNAME --global-var password=$PASSWORD --timeout-request 120000"
+				bat "newman run abap_sci.postman_collection.json --insecure --bail --environment NPL.postman_environment.json --global-var username=$USERNAME --global-var password=$PASSWORD --timeout-request 120000"
 			}
 		}
     }

@@ -4,7 +4,7 @@ node {
 	def skip_pipeline = false
     stage('Preparation') {
         deleteDir()
-        git poll: true, branch: 'master', url:'https://gitserver.xtonet.com/COY/YDMSMS_G4.git'
+        git poll: true, branch: 'master', url:'https://github.com/pacroy/abap-rest-api.git'
 		dir('sap-pipeline') {
 			bat "git clone https://github.com/pacroy/abap-ci-postman.git ."
 		}

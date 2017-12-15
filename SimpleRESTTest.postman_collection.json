@@ -24,36 +24,8 @@
 				}
 			],
 			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "username",
-							"value": "{{username}}",
-							"type": "string"
-						},
-						{
-							"key": "password",
-							"value": "{{password}}",
-							"type": "string"
-						},
-						{
-							"key": "saveHelperData",
-							"type": "any"
-						},
-						{
-							"key": "showPassword",
-							"value": false,
-							"type": "boolean"
-						}
-					]
-				},
 				"method": "GET",
 				"header": [
-					{
-						"key": "Authorization",
-						"value": "Basic REVWRUxPUEVSOlBhY3JveTU1"
-					},
 					{
 						"key": "X-CSRF-Token",
 						"value": "Fetch"
@@ -61,7 +33,7 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "{{protocol}}://{{host}}:{{port}}/test/hello?sap-client=001",
+					"raw": "{{protocol}}://{{host}}:{{port}}/test/hello?sap-client=001&sap-language=EN",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -75,6 +47,11 @@
 						{
 							"key": "sap-client",
 							"value": "001",
+							"equals": true
+						},
+						{
+							"key": "sap-language",
+							"value": "EN",
 							"equals": true
 						}
 					]
@@ -136,6 +113,52 @@
 				"description": ""
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			},
+			{
+				"key": "saveHelperData",
+				"type": "any"
+			},
+			{
+				"key": "showPassword",
+				"value": false,
+				"type": "boolean"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f8cf7fde-0c23-47f1-b6b2-8eb76492188a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "321da5e5-41a3-4cfe-9897-7922f04fbe4a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

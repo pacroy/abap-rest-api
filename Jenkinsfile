@@ -3,7 +3,7 @@ import jenkins.model.*
 node {
 	def HOST = "vhcalnplci.dummy.nodomain"
 	def CREDENTIAL = "NPL"
-	def PACKAGE = "$REST_SIMPLE"
+	def PACKAGE = '''$REST_SIMPLE'''
 	def COVERAGE = 80
 	
     stage('Preparation') {

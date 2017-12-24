@@ -12,7 +12,8 @@ CLASS ltcl_get_root_handler DEFINITION FINAL FOR TESTING
     METHODS:
       setup,
       hello_is_handled FOR TESTING RAISING cx_static_check,
-      root_is_not_handled FOR TESTING RAISING cx_static_check.
+      root_is_not_handled FOR TESTING RAISING cx_static_check,
+      prometheus_is_handled FOR TESTING RAISING cx_static_check.
 ENDCLASS.
 
 
@@ -34,6 +35,14 @@ CLASS ltcl_get_root_handler IMPLEMENTATION.
   METHOD root_is_not_handled.
     mo_router->find_match( EXPORTING iv_path = '/' IMPORTING es_match_info = DATA(ls_match_info) ).
     cl_abap_unit_assert=>assert_initial( ls_match_info-handler_class ).
+  ENDMETHOD.
+
+  METHOD prometheus_is_handled.
+    mo_router->find_match( EXPORTING iv_path = '/hello/prometheus' IMPORTING es_match_info = DATA(ls_match_info) ).
+    cl_abap_unit_assert=>assert_equals(
+        exp = zcl_prometheus_rest_resource=>c_class_name
+        act = ls_match_info-handler_class
+      ).
   ENDMETHOD.
 
 ENDCLASS.

@@ -16,6 +16,7 @@ ENDCLASS.
 CLASS ltcl_base IMPLEMENTATION.
 
   METHOD constructor.
+    zcl_prometheus=>test_mode = abap_true.
     mo_cut = NEW #( ).
     mo_cut->mo_request = NEW cl_rest_request( ).
     mo_cut->mo_response = NEW cl_rest_response( ).
@@ -60,7 +61,16 @@ ENDCLASS.
 CLASS ltcl_post IMPLEMENTATION.
 
   METHOD happy_path.
-    mo_cut->mo_request->get_entity( )->set_string_data( `{"name": "John","age": 32,"city": "Bangkok"}` ).
+    DATA(rest_entity) = CAST if_rest_entity( cl_abap_testdouble=>create( 'IF_REST_ENTITY ' ) ) ##NO_TEXT.
+    cl_abap_testdouble=>configure_call( rest_entity )->returning( `{"name": "John","age": 32,"city": "Bangkok"}` ).
+    rest_entity->get_string_data( ).
+
+    mo_cut->mo_request = CAST if_rest_request( cl_abap_testdouble=>create( 'IF_REST_REQUEST ' ) ) ##NO_TEXT.
+    cl_abap_testdouble=>configure_call( mo_cut->mo_request )->returning( rest_entity ).
+    mo_cut->mo_request->get_entity( ).
+
+    cl_abap_testdouble=>configure_call( mo_cut->mo_request )->returning( VALUE string_table( ( `FIRST` ) ( `SECOND` ) ( `THIRD` ) ) ).
+    mo_cut->mo_request->get_uri_segments( ).
 
     mo_cut->if_rest_resource~post( NEW cl_rest_entity( ) ).
 

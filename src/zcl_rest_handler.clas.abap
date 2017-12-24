@@ -12,10 +12,13 @@ ENDCLASS.
 
 
 
-CLASS zcl_rest_handler IMPLEMENTATION.
+CLASS ZCL_REST_HANDLER IMPLEMENTATION.
+
+
   METHOD if_rest_application~get_root_handler.
     DATA(lo_router) = NEW cl_rest_router( ).
-    lo_router->attach( iv_template = '/hello' iv_handler_class = 'ZCL_REST_RESOURCE' ).
+    lo_router->attach( iv_template = '/hello' iv_handler_class = zcl_rest_resource=>c_class_name ).
+    lo_router->attach( iv_template = '/hello/metrics' iv_handler_class = zcl_prometheus_rest_resource=>c_class_name ).
 
     ro_root_handler = lo_router.
   ENDMETHOD.

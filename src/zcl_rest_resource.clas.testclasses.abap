@@ -16,7 +16,7 @@ ENDCLASS.
 CLASS ltcl_base IMPLEMENTATION.
 
   METHOD constructor.
-    zcl_prometheus=>test_mode = abap_true.
+    zcl_log=>test_mode = zcl_prometheus=>test_mode = abap_true.
     mo_cut = NEW #( ).
     mo_cut->mo_request = NEW cl_rest_request( ).
     mo_cut->mo_response = NEW cl_rest_response( ).

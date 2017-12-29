@@ -106,7 +106,7 @@ CLASS ZCL_REST_RESOURCE IMPLEMENTATION.
   METHOD record_metric.
 
     TRY.
-        zcl_prometheus=>set_instance_name_from_request( me->mo_request ).
+        zcl_prometheus=>set_instance_from_request( me->mo_request ).
         zcl_prometheus=>write_multiple( VALUE #(
           ( key = |hello_count\{method="{ i_method }",status="{ i_response }"\}| value = '1' command = zif_prometheus=>c_command-increment )
           ( key = |hello_duration\{method="{ i_method }",status="{ i_response }"\}| value = me->runtime->get_runtime( ) ) ) ).
